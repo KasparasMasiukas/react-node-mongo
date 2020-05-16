@@ -1,0 +1,12 @@
+FROM node:12-alpine
+
+RUN mkdir -p /usr/src/app
+
+COPY package.json /usr/src/app/
+
+WORKDIR /usr/src/app
+
+RUN npm install
+RUN npm install mocha
+
+ENV MONGODB_CONNECTION_STRING mongodb://database:27017/db

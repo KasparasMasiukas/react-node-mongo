@@ -1,0 +1,11 @@
+version: '3'
+services:
+    mocha:
+        container_name: mocha_test
+        build:
+            context: ./server
+            dockerfile: Dockerfile.test
+        image: mocha-test
+        volumes:
+            - ./server:/usr/src/app
+        command: npm test

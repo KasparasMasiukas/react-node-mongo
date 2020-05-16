@@ -1,0 +1,33 @@
+version: "3"
+services:
+  frontend:
+    container_name: react_client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: react-client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/usr/src/app
+    stdin_open: true
+  backend:
+    container_name: node_server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    command: nodemon index.js
+    image: node-server
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./server:/usr/src/app
+  database:
+    container_name: mongoDB
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - /data/db:/data/db
+    logging:
+      driver: "none"
